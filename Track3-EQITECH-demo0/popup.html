@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      width: 245px;
+      font-family: Arial, sans-serif;
+      padding: 10px;
+      background: #f4f4f4;
+    }
+    .status-toast {
+      display: none;
+      background: #10ac84;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 6px 8px;
+      border-radius: 5px;
+      margin-bottom: 8px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .warning-box {
+      display: none;
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+      font-size: 10.5px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      margin-bottom: 8px;
+      line-height: 1.4;
+      text-align: left;
+    }
+    h4 {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #666;
+      margin-bottom: 6px;
+      text-align: left;
+    }
+    .section {
+      margin-bottom: 10px;
+    }
+    button {
+      width: 100%;
+      padding: 7px;
+      margin: 2px 0;
+      border: none;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: transform 0.1s, opacity 0.2s;
+    }
+    button:hover {
+      opacity: 0.9;
+      transform: scale(0.98);
+    }
+    .dark-text { color: #000000 !important; }
+    .light-text { color: #FFFFFF !important; }
+    
+    .bionic-btn { background: #2e86de; color: #FFFFFF; }
+    .voice-btn { background: #ff9f43; color: #FFFFFF; }
+    .stop-btn { background: #ee5253; color: #FFFFFF; margin-top: 2px; }
+    .dyslexia-btn { background: #1dd1a1; color: #FFFFFF; }
+    .dyslexia-btn.active { background: #10ac84; border: 2px solid #fff; }
+
+    .audit-btn {
+      background: linear-gradient(135deg, #6c5ce7, #5f27cd);
+      color: #FFFFFF;
+    }
+    .audit-card {
+      background: #ffffff;
+      border: 1px solid #e1e8ed;
+      border-radius: 8px;
+      padding: 8px;
+      margin-top: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+    .score-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .score-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 800;
+      color: #fff;
+      background: #10ac84;
+      flex-shrink: 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+    .score-info {
+      text-align: left;
+    }
+    .score-title {
+      font-size: 13px;
+      font-weight: bold;
+      color: #2d3436;
+    }
+    .score-grade {
+      font-size: 11px;
+      color: #636e72;
+      font-weight: 600;
+    }
+    .metrics-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10.5px;
+      color: #4b6584;
+      padding: 2px 0;
+    }
+    .metric-row b {
+      color: #2f3542;
+    }
+    .speak-audit-btn {
+      background: #ffa801;
+      color: #ffffff;
+      padding: 5px;
+      font-size: 11px;
+      margin-bottom: 6px;
+    }
+    .issues-container {
+      max-height: 110px;
+      overflow-y: auto;
+      text-align: left;
+      font-size: 10px;
+      line-height: 1.35;
+      padding: 4px 6px;
+      background: #f8f9fa;
+      border-radius: 4px;
+      border: 1px solid #edf2f7;
+    }
+    .issue-item {
+      margin-bottom: 4px;
+      padding-left: 10px;
+      position: relative;
+    }
+    .issue-item::before {
+      content: '•';
+      position: absolute;
+      left: 2px;
+      color: #e74c3c;
+      font-weight: bold;
+    }
+    .issue-item.pass::before {
+      content: '✓';
+      color: #2ecc71;
+    }
+
+    .autofix-btn {
+      background: linear-gradient(135deg, #10ac84, #00d2d3);
+      color: #ffffff;
+      padding: 7px;
+      font-size: 11px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      box-shadow: 0 2px 6px rgba(16, 172, 132, 0.25);
+    }
+    .fix-banner {
+      background: #e8f8f5;
+      color: #0e8163;
+      border: 1px solid #a3e4d7;
+      border-radius: 4px;
+      padding: 5px 6px;
+      font-size: 10px;
+      font-weight: bold;
+      margin-bottom: 6px;
+      text-align: left;
+    }
+
+    .report-btn {
+      background: #2d3436;
+      color: #FFFFFF;
+      padding: 7px;
+      font-size: 11px;
+      margin-top: 3px;
+      margin-bottom: 5px;
+    }
+
+    .motor-btn {
+      background: #4b6584;
+      color: #FFFFFF;
+    }
+    .motor-btn.active {
+      background: #2c3e50;
+      border: 2px solid #fff;
+    }
+
+    .reset-btn {
+      background: #e0e0e0;
+      color: #333333;
+      border: 1px solid #ccc;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Live Status & Page Warning Banners -->
+  <div id="popupStatus" class="status-toast"></div>
+  <div id="popupWarning" class="warning-box"></div>
+
+  <!-- VIBGYOR Section -->
+  <div class="section">
+    <h4>VIBGYOR Colors</h4>
+    <button style="background: #8B00FF;" class="light-text" data-bg="#8B00FF" data-text="#FFFFFF">Violet</button>
+    <button style="background: #4B0082;" class="light-text" data-bg="#4B0082" data-text="#FFFFFF">Indigo</button>
+    <button style="background: #0000FF;" class="light-text" data-bg="#0000FF" data-text="#FFFFFF">Blue</button>
+    <button style="background: #00FF00;" class="dark-text" data-bg="#00FF00" data-text="#000000">Green</button>
+    <button style="background: #FFFF00;" class="dark-text" data-bg="#FFFF00" data-text="#000000">Yellow</button>
+    <button style="background: #FF7F00;" class="dark-text" data-bg="#FF7F00" data-text="#000000">Orange</button>
+    <button style="background: #FF0000;" class="light-text" data-bg="#FF0000" data-text="#FFFFFF">Red</button>
+  </div>
+
+  <!-- Special Modes -->
+  <div class="section">
+    <h4>Special Modes</h4>
+    <button style="background: #000000;" class="light-text" data-bg="#000000" data-text="#E0E0E0">Black</button>
+    <button style="background: #FFFFFF;" class="dark-text" data-bg="#FFFFFF" data-text="#121212">White</button>
+    <button style="background: #121212; color: #00E676;" data-bg="#121212" data-text="#E0E0E0">🌙 Dark Mode</button>
+    <button style="background: #231F20; color: #FFB74D;" data-bg="#231F20" data-text="#F5E6C8">🦉 Night Mode</button>
+  </div>
+
+  <!-- Dyslexia Mode -->
+  <div class="section">
+    <h4>🧠 Dyslexia Support</h4>
+    <button class="dyslexia-btn" id="dyslexiaBtn">🔤 Enable Dyslexia Font</button>
+  </div>
+
+  <!-- Efficiency & Accessibility Audit Score -->
+  <div class="section">
+    <h4>🛡️ Accessibility & Efficiency Score</h4>
+    <button class="audit-btn" id="auditBtn">📊 Audit Website Score</button>
+    <div id="auditResult" class="audit-card" style="display: none;">
+      <div class="score-header">
+        <div class="score-circle" id="scoreCircle">--</div>
+        <div class="score-info">
+          <div class="score-title" id="scoreTitle">Score: --/100</div>
+          <div class="score-grade" id="scoreGrade">Grade: --</div>
+        </div>
+      </div>
+      <div class="metrics-grid">
+        <div class="metric-row"><span>🖼️ Image Alt:</span> <b id="mImages">--</b></div>
+        <div class="metric-row"><span>📑 Headings:</span> <b id="mHeadings">--</b></div>
+        <div class="metric-row"><span>🏷️ Forms & Labels:</span> <b id="mForms">--</b></div>
+        <div class="metric-row"><span>🔍 Zoom & Vision:</span> <b id="mZoom">--</b></div>
+        <div class="metric-row"><span>♿ Screen Reader:</span> <b id="mSR">--</b></div>
+      </div>
+      <button class="autofix-btn" id="autoFixBtn">⚡ One-Click Fix (Boost to 95%+)</button>
+      <div id="fixBanner" class="fix-banner" style="display: none;"></div>
+      <button class="report-btn" id="exportReportBtn">📄 Export Site Owner Compliance Report</button>
+      <button class="speak-audit-btn" id="speakAuditBtn">🔊 Speak Audit Summary</button>
+      <div id="issuesList" class="issues-container"></div>
+    </div>
+  </div>
+
+  <!-- Motor & Visual Assistance -->
+  <div class="section">
+    <h4>🎯 Motor & Visual Assistance</h4>
+    <button class="motor-btn" id="rulerBtn">📏 Reading Ruler (Alt+R)</button>
+    <button class="motor-btn" id="focusRingsBtn">🎯 Focus Rings (Alt+K)</button>
+    <button class="motor-btn" id="contrastFixBtn">🌓 Auto-Boost Contrast (Alt+C)</button>
+  </div>
+
+  <!-- Reading & Voice Assist -->
+  <div class="section">
+    <h4>Voice & Reading</h4>
+    <button class="bionic-btn" id="bionicBtn">⚡ Toggle Bionic</button>
+    <button class="voice-btn" id="voiceCmdBtn">🎙️ Start Voice Command</button>
+    <button class="stop-btn" id="stopAudioBtn">🔇 Stop Audio</button>
+  </div>
+
+  <!-- Reset Button -->
+  <button class="reset-btn" id="resetBtn">🔄 Reset Original</button>
+
+  <script src="popup.js"></script>
+</body>
+</html>

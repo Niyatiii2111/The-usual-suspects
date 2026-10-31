@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Usual Suspects – Universal Web Accessibility Layer for Any Website</title>
+  <meta name="description" content="Hackathon Track 3: Universal Web Accessibility Layer (Problem Statement 1.4). Dual-delivery solution: Drop-in JavaScript widget for site owners & Chrome Extension (Manifest V3) for end users by The Usual Suspects.">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    /* Prevent flash of unstyled theme */
+    try {
+      var t = localStorage.getItem('the-usual-suspects-theme') || localStorage.getItem('eqitech-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.dataset.theme = t;
+    } catch(e) {}
+  </script>
+</head>
+<body>
+  <!-- Accessible Skip to Content Link -->
+  <a class="skip-to-main" href="#main">Skip to main content (Alt+S)</a>
+
+  <!-- ARIA Live Announcement Region -->
+  <div id="live-announcer" class="sr-only" role="status" aria-live="polite"></div>
+
+  <!-- Site Navigation Header -->
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Main Navigation">
+      <a class="brand" href="#top">
+        <img src="assets/logo.svg" alt="" width="36" height="36" aria-hidden="true">
+        <span>The Usual Suspects</span>
+        <span class="brand-badge">Track 3</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#playground">Playground</a></li>
+        <li><a href="#audit">WCAG Audit</a></li>
+        <li><a href="#website-demo">Website Demo</a></li>
+        <li><a href="#extension">Chrome Extension</a></li>
+        <li><a href="#widget">Drop-In Widget</a></li>
+        <li><a href="demo-site.html" target="_blank" rel="noopener">Demo Site ↗</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Live Extension Detection Badge -->
+        <a href="#extension" id="ext-status-badge" class="ext-status" title="Extension Connection Status">
+          <span class="dot"></span>
+          <span id="ext-status-text">Checking Extension...</span>
+        </a>
+
+        <!-- Dark/Light Mode Switcher -->
+        <button id="theme-toggle" class="icon-btn" aria-label="Toggle light and dark mode" aria-pressed="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Landmark -->
+  <main id="main" tabindex="-1">
+
+    <!-- ========================================== -->
+    <!-- 1. HERO SECTION -->
+    <!-- ========================================== -->
+    <section class="hero wrap" id="top" aria-labelledby="hero-title">
+      <div class="hero-glow-bg" aria-hidden="true"></div>
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-tags">
+            <span class="hero-tag">🛡️ Problem Statement 1.4</span>
+            <span class="hero-tag">♿ Universal Accessibility Layer</span>
+            <span class="hero-tag">⚡ 1-Click 95%+ Auto-Fix</span>
+          </div>
+
+          <h1 id="hero-title">
+            Universal Web Accessibility Layer <span class="gradient-text">for Any Website</span>
+          </h1>
+
+          <p class="hero-lead">
+            Empowering visually impaired, dyslexic, and motor-impaired individuals across the entire web. Built by <strong>The Usual Suspects</strong> with a <strong>dual-delivery architecture</strong>: an instant 1-line drop-in widget for website owners, and a high-performance Chrome Extension for end users.
+          </p>
+
+          <div class="btn-row">
+            <a class="btn btn-primary btn-lg" href="downloads/the-usual-suspects-extension-v2.1.zip" download="the-usual-suspects-extension-v2.1.zip" id="hero-dl-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Download Extension (.zip)</span>
+            </a>
+            <a class="btn btn-secondary btn-lg" href="#website-demo">
+              <span>🏥 Live Website Demo ↓</span>
+            </a>
+            <a class="btn btn-secondary btn-lg" href="#widget">
+              <span>⚡ Embed Drop-In Widget</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Interactive Hero Mockup Card -->
+        <div class="mockup-card" role="region" aria-label="Interactive The Usual Suspects Accessibility Panel Preview">
+          <div class="mockup-header">
+            <div class="mockup-brand">
+              <img src="assets/logo.svg" alt="" width="26" height="26" aria-hidden="true">
+              <span>The Usual Suspects Layer</span>
+            </div>
+            <span class="mockup-score-badge">WCAG AA 96%</span>
+          </div>
+
+          <div>
+            <div class="mockup-themes-title">VIBGYOR & Special Modes</div>
+            <div class="theme-swatches" role="group" aria-label="Color mode presets">
+              <button class="swatch-btn" style="background:#8B00FF;" data-swatch="#8B00FF" aria-label="Violet theme"></button>
+              <button class="swatch-btn" style="background:#4B0082;" data-swatch="#4B0082" aria-label="Indigo theme"></button>
+              <button class="swatch-btn" style="background:#0000FF;" data-swatch="#0000FF" aria-label="Blue theme"></button>
+              <button class="swatch-btn" style="background:#00FF00;" data-swatch="#00FF00" aria-label="Green theme"></button>
+              <button class="swatch-btn" style="background:#FFFF00;" data-swatch="#FFFF00" aria-label="Yellow theme"></button>
+              <button class="swatch-btn" style="background:#FF7F00;" data-swatch="#FF7F00" aria-label="Orange theme"></button>
+              <button class="swatch-btn" style="background:#FF0000;" data-swatch="#FF0000" aria-label="Red theme"></button>
+              <button class="swatch-btn" style="background:#111827; border:1px solid #374151;" data-swatch="dark" aria-label="Dark mode"></button>
+              <button class="swatch-btn" style="background:#231F20; border:1px solid #FFB74D;" data-swatch="night" aria-label="Night owl mode"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 2. PROBLEM & IMPACT BANNER -->
+    <!-- ========================================== -->
+    <section class="wrap section" aria-labelledby="impact-heading">
+      <div class="impact-banner">
+        <div class="wrap narrow" style="text-align: center;">
+          <h2 id="impact-heading" style="color: #ffffff; margin-top:0;">Web Barriers Exclude Millions Every Day</h2>
+          <p style="opacity: 0.92; font-size: 1.15rem; max-width: 680px; margin: 0 auto;">
+            Most modern websites fail basic accessibility standards. Missing image descriptions, low-contrast text, mouse-dependent menus, and complex layouts prevent users with disabilities from accessing essential services.
+          </p>
+        </div>
+        <div class="wrap impact-grid">
+          <div class="stat-item">
+            <b>96.8%</b>
+            <p>of top 1M homepages fail WCAG 2.1 checks (WebAIM)</p>
+          </div>
+          <div class="stat-item">
+            <b>1 in 5</b>
+            <p>people live with dyslexia or reading comprehension differences</p>
+          </div>
+          <div class="stat-item">
+            <b>1.3B</b>
+            <p>people worldwide experience significant disabilities (WHO)</p>
+          </div>
+          <div class="stat-item">
+            <b>100%</b>
+            <p>Client-side execution with zero tracking & zero external APIs</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 3. DUAL-DELIVERY ARCHITECTURE -->
+    <!-- ========================================== -->
+    <section class="section alt" aria-labelledby="arch-heading">
+      <div class="wrap">
+        <div class="narrow">
+          <h2 id="arch-heading">Dual-Delivery Architecture</h2>
+          <p class="hero-lead">
+            Whether you are a website owner ensuring legal WCAG compliance or an end user navigating any site on the web, The Usual Suspects has you covered.
+          </p>
+        </div>
+
+        <div class="architecture-cards">
+          <!-- Mode 1 Card -->
+          <div class="arch-card mode1">
+            <span class="arch-pill">Mode 1 • Website Owners</span>
+            <h3>Drop-In JavaScript Widget</h3>
+            <p>A single line of code added before <code>&lt;/body&gt;</code> that instantly equips your public portal or small business site with full accessibility tools.</p>
+            <ul class="arch-feature-list">
+              <li><span class="check-icon">✓</span> Discreet floating ♿ badge and slide-out accessibility drawer</li>
+              <li><span class="check-icon">✓</span> In-browser WCAG 2.1 AA DOM scanner with real-time score</li>
+              <li><span class="check-icon">✓</span> 1-Click Auto-Fix boosting compliance to 95%+</li>
+              <li><span class="check-icon">✓</span> Client-ready printable Executive Compliance Certificate</li>
+            </ul>
+            <div style="margin-top: auto;">
+              <a class="btn btn-primary btn-sm" href="#widget">Get Embed Code</a>
+            </div>
+          </div>
+
+          <!-- Mode 2 Card -->
+          <div class="arch-card mode2">
+            <span class="arch-pill">Mode 2 • End Users</span>
+            <h3>Chrome Extension (Manifest V3)</h3>
+            <p>A personal accessibility companion that disabled users can bring to any webpage across the entire Internet, transforming difficult sites on demand.</p>
+            <ul class="arch-feature-list">
+              <li><span class="check-icon">✓</span> High-contrast VIBGYOR color themes & Night Owl mode</li>
+              <li><span class="check-icon">✓</span> Bundled OpenDyslexic weighted vector font engine</li>
+              <li><span class="check-icon">✓</span> Audio Image Explainer for low-vision & blind users</li>
+              <li><span class="check-icon">✓</span> Universal accessibility hotkeys & voice navigation</li>
+            </ul>
+            <div style="margin-top: auto;">
+              <a class="btn btn-accent btn-sm" href="downloads/the-usual-suspects-extension-v2.1.zip" download="the-usual-suspects-extension-v2.1.zip">Download Extension (.zip)</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 4. EVERYTHING YOU NEED IN ONE PANEL -->
+    <!-- ========================================== -->
+    <section id="features" class="wrap section" aria-labelledby="feat-heading">
+      <div class="narrow">
+        <h2 id="feat-heading">Everything You Need, One Unified Layer</h2>
+        <p class="hero-lead">Engineered specifically to solve WCAG 2.1 AA success criteria across visual, auditory, cognitive, and motor impairments.</p>
+      </div>
+
+      <ul class="features-grid">
+        <li class="card">
+          <div class="card-icon" aria-hidden="true">🔤</div>
+          <h3>Dyslexia Typography</h3>
+          <p>Bundled OpenDyslexic vector fonts with heavy-bottom letter baselines preventing rotational flipping, plus custom word & letter spacing.</p>
+          <span class="shortcut-tag">WCAG 1.4.12</span>
+        </li>
+
+        <li class="card">
+          <div class="card-icon" aria-hidden="true">📊</div>
+          <h3>WCAG 2.1 AA Scanner</h3>
+          <p>Real-time DOM analyzer inspecting image alt tags, landmarks, form labels, viewport zoom locks, and language attributes.</p>
+          <span class="shortcut-tag">WCAG 2.1 AA</span>
+        </li>
+
+        <li class="card">
+          <div class="card-icon" aria-hidden="true">⚡</div>
+          <h3>1-Click Auto-Fix (95%+)</h3>
+          <p>Dynamically patches detected accessibility flaws in the live DOM in 1 second, boosting compliance scores to Grade A.</p>
+          <span class="shortcut-tag">Instant Remediation</span>
+        </li>
+
+        <li class="card">
+          <div class="card-icon" aria-hidden="true">📄</div>
+          <h3>Certified Compliance Report</h3>
+          <p>Printable Executive Compliance Certificate (PDF/HTML) with certification stamp, checklist, and audit grade for regulatory audits.</p>
+          <span class="shortcut-tag">Bonus Twist</span>
+        </li>
+
+        <li class="card">
+          <div class="card-icon" aria-hidden="true">🌈</div>
+          <h3>VIBGYOR & Special Themes</h3>
+          <p>Full spectrum high-contrast themes (Violet, Indigo, Blue, Green, Yellow, Orange, Red) plus Dark Mode, Night Owl, and Pure Black/White.</p>
+          <span class="shortcut-tag">WCAG 1.4.3</span>
+        </li>
+
+        <li class="card">
+          <div class="card-icon" aria-hidden="true">🎯</div>
+          <h3>Glowing Focus Rings</h3>
+          <p>High-visibility glowing focus rings (`:focus-visible`) and Skip to Main Content shortcut for mouse-free keyboard navigation.</p>
+          <span class="shortcut-tag">Alt + K / Alt + S</span>
+        </li>
+
+        <li class="card">
+          <div class="card-icon" aria-hidden="true">📏</div>
+          <h3>Visual Reading Ruler</h3>
+          <p>Tinted visual guide that tracks mouse movement across paragraphs, preventing line skipping for ADHD and dyslexic readers.</p>
+          <span class="shortcut-tag">Alt + R</span>
+        </li>
+
+        <li class="card">
+          <div class="card-icon" aria-hidden="true">🔊</div>
+          <h3>Web Speech Audio Reader</h3>
+          <p>Highlight any text on the page to trigger floating 🔊 Read button or read active elements aloud with natural browser speech synthesis.</p>
+          <span class="shortcut-tag">Alt + A</span>
+        </li>
+
+        <li class="card">
+          <div class="card-icon" aria-hidden="true">🎙️</div>
+          <h3>Voice Command Navigation</h3>
+          <p>Hands-free navigation via Web Speech Recognition. Speak commands like "Open services" or "Click button" to control the page.</p>
+          <span class="shortcut-tag">Alt + V</span>
+        </li>
+
+        <li class="card">
+          <div class="card-icon" aria-hidden="true">🖼️</div>
+          <h3>Audio Image Explainer</h3>
+          <p>Modal viewer for low-vision users that extracts metadata and narrates image contents with voice descriptions.</p>
+          <span class="shortcut-tag">WCAG 1.1.1</span>
+        </li>
+
+        <li class="card">
+          <div class="card-icon" aria-hidden="true">⚡</div>
+          <h3>Bionic Reading Engine</h3>
+          <p>Applies fixation bolding to the first half of each word, guiding the eyes through text to dramatically accelerate comprehension.</p>
+          <span class="shortcut-tag">Cognitive Flow</span>
+        </li>
+
+        <li class="card">
+          <div class="card-icon" aria-hidden="true">🔒</div>
+          <h3>100% Privacy-First</h3>
+          <p>Zero tracking, zero analytics, zero external API dependencies. All remediation and audit calculations happen strictly in your browser.</p>
+          <span class="shortcut-tag">Local Execution</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 5. INTERACTIVE LIVE ACCESSIBILITY PLAYGROUND -->
+    <!-- ========================================== -->
+    <section id="playground" class="section alt" aria-labelledby="play-heading">
+      <div class="wrap">
+        <div class="narrow">
+          <h2 id="play-heading">Try The Usual Suspects Right Here</h2>
+          <p class="hero-lead">Experience the real accessibility engines directly in your browser. Toggle the controls below and observe the live transformations.</p>
+        </div>
+
+        <div class="playground-box">
+          <div class="playground-controls" role="group" aria-label="Playground tool controls">
+            <label><input type="checkbox" id="play-dyslexia"> 🔤 Dyslexia Font</label>
+            <label><input type="checkbox" id="play-bionic"> ⚡ Bionic Reading</label>
+            <label><input type="checkbox" id="play-contrast"> 🌓 High Contrast</label>
+            <label><input type="checkbox" id="play-ruler"> 📏 Reading Ruler</label>
+            <label><input type="checkbox" id="play-focus"> 🎯 Focus Rings</label>
+
+            <div style="margin-left: auto; display: flex; gap: 0.6rem; flex-wrap: wrap;">
+              <button class="btn btn-secondary btn-sm" id="play-speak-btn">
+                🔊 Read Aloud (TTS)
+              </button>
+              <button class="btn btn-secondary btn-sm" id="play-voice-btn" style="background:#0abde3; color:#fff; border-color:#0abde3;">
+                🎙️ Start Voice Command
+              </button>
+            </div>
+          </div>
+
+          <!-- Color Mode Swatches for Playground -->
+          <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem; flex-wrap:wrap;">
+            <span style="font-size:0.85rem; font-weight:700; color:var(--text-muted);">Quick Themes:</span>
+            <button class="swatch-btn" style="background:#8B00FF;" data-swatch="#8B00FF" aria-label="Violet"></button>
+            <button class="swatch-btn" style="background:#4B0082;" data-swatch="#4B0082" aria-label="Indigo"></button>
+            <button class="swatch-btn" style="background:#0000FF;" data-swatch="#0000FF" aria-label="Blue"></button>
+            <button class="swatch-btn" style="background:#00FF00;" data-swatch="#00FF00" aria-label="Green"></button>
+            <button class="swatch-btn" style="background:#FFFF00;" data-swatch="#FFFF00" aria-label="Yellow"></button>
+            <button class="swatch-btn" style="background:#FF7F00;" data-swatch="#FF7F00" aria-label="Orange"></button>
+            <button class="swatch-btn" style="background:#FF0000;" data-swatch="#FF0000" aria-label="Red"></button>
+            <button class="swatch-btn" style="background:#111827; border:1px solid #374151;" data-swatch="dark" aria-label="Dark Mode"></button>
+            <button class="swatch-btn" style="background:#231F20; border:1px solid #FFB74D;" data-swatch="night" aria-label="Night Mode"></button>
+            <button class="swatch-btn" style="background:#000000; border:1px solid #fff;" data-swatch="black" aria-label="High Contrast Black"></button>
+            <button class="swatch-btn" style="background:#ffffff; border:1px solid #000;" data-swatch="white" aria-label="High Contrast White"></button>
+          </div>
+
+          <!-- Transforming Content Area -->
+          <div id="playground-text" class="playground-text-area">
+            <div id="playground-ruler" class="reading-ruler-overlay" aria-hidden="true"></div>
+            <p>
+              Universal web access is a fundamental human right. When letter forms rotate, foreground text lacks contrast, or navigational controls require delicate mouse coordination, basic digital services become inaccessible walls. The Usual Suspects transforms any digital interface in real-time, anchoring letter baselines, enhancing relative luminance to WCAG AA ratios, and empowering every individual to navigate independently.
+            </p>
+          </div>
+
+          <!-- Sample Image Audio Explainer Demo -->
+          <div class="sample-img-container">
+            <div class="sample-img-preview" id="sample-accessible-img" role="img" tabindex="0" alt="Apex Community Health Portal patient check-in station with accessible tablet interface." title="Click to hear audio description" aria-label="Apex Community Health Portal patient check-in station with accessible tablet interface. Click to listen to audio narration.">
+              🏥
+            </div>
+            <div>
+              <div style="font-weight:700; font-size:1rem; margin-bottom:0.25rem;">Audio Image Explainer Demo</div>
+              <p style="margin:0 0 0.5rem 0; font-size:0.9rem; color:var(--text-muted);">Blind and low-vision users can click or press Enter on any picture to trigger spoken image narration.</p>
+              <button class="btn btn-secondary btn-sm" id="sample-img-audio-btn">🔊 Listen to Image Description</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 6. REAL-TIME WCAG 2.1 AA AUDIT SCANNER & AUTO-FIX -->
+    <!-- ========================================== -->
+    <section id="audit" class="wrap section" aria-labelledby="audit-heading">
+      <div class="narrow">
+        <h2 id="audit-heading">Real-Time WCAG 2.1 AA Audit Scanner</h2>
+        <p class="hero-lead">Evaluates the live page Document Object Model (DOM) across the 5 core WCAG categories, with 1-Click Auto-Fix to boost your score to 95%+.</p>
+      </div>
+
+      <div class="audit-engine-box">
+        <!-- Website URL & Demo Website Option Selector -->
+        <div style="background:var(--bg-alt); border:1px solid var(--line); border-radius:var(--radius-md); padding:1.25rem; margin-bottom:1.5rem;">
+          <label for="audit-target-url" style="display:block; font-weight:700; font-size:0.95rem; margin-bottom:0.5rem; color:var(--text);">
+            🌐 Test Any Website URL or Choose Demo Website Option:
+          </label>
+          <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+            <input type="url" id="audit-target-url" value="https://portal.apexhealth.org" placeholder="https://example.com" style="flex:1; min-width:240px; padding:0.65rem 1rem; border:1px solid var(--line); border-radius:8px; font:inherit; background:var(--surface); color:var(--text);">
+            <button class="btn btn-primary" id="check-url-score-btn" style="white-space:nowrap;">
+              🔍 Check Score
+            </button>
+            <a class="btn btn-secondary" href="demo-site.html" target="_blank" rel="noopener" id="launch-demo-site-btn" style="white-space:nowrap;">
+              🏥 Launch Demo Site ↗
+            </a>
+          </div>
+          <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; font-size:0.85rem; color:var(--text-muted);">
+            <span style="font-weight:700; color:var(--text);">Demo Options:</span>
+            <button class="chip-btn active" data-url="demo-site.html" data-name="Apex Health Portal (Municipal)" style="cursor:pointer; background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:4px 12px; font-size:0.82rem; font-weight:600; color:var(--text);">🏥 Apex Health Portal (Live Demo)</button>
+            <button class="chip-btn" data-url="https://municipal.gov/services" data-name="Municipal Public Services" style="cursor:pointer; background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:4px 12px; font-size:0.82rem; font-weight:600; color:var(--text);">🏛️ Municipal Services</button>
+            <button class="chip-btn" data-url="https://shop.localbiz.com" data-name="Small Business Storefront" style="cursor:pointer; background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:4px 12px; font-size:0.82rem; font-weight:600; color:var(--text);">🏪 Small Business Shop</button>
+            <button class="chip-btn" data-url="https://library.city.edu" data-name="City University Library" style="cursor:pointer; background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:4px 12px; font-size:0.82rem; font-weight:600; color:var(--text);">📚 Community Library</button>
+          </div>
+        </div>
+
+        <div class="audit-top-row">
+          <div class="score-dial-wrap">
+            <div class="circular-score" id="audit-score-circle" role="status" aria-label="Current accessibility score">
+              <div class="circular-score-val" id="audit-score-num">--<small>/100</small></div>
+            </div>
+            <span class="grade-pill" id="audit-grade-pill">Evaluating...</span>
+          </div>
+
+          <div class="metrics-list">
+            <div class="metric-bar-item">
+              <span>🖼️ Non-Text Content (1.1.1):</span>
+              <div class="bar-track"><div class="bar-fill" id="m-images-bar" style="width: 75%;"></div></div>
+              <span class="metric-val" id="m-images-val">--%</span>
+            </div>
+
+            <div class="metric-bar-item">
+              <span>📑 Headings & Landmarks (1.3.1):</span>
+              <div class="bar-track"><div class="bar-fill" id="m-headings-bar" style="width: 100%;"></div></div>
+              <span class="metric-val" id="m-headings-val">100%</span>
+            </div>
+
+            <div class="metric-bar-item">
+              <span>🏷️ Form Identification (4.1.2):</span>
+              <div class="bar-track"><div class="bar-fill" id="m-forms-bar" style="width: 80%;"></div></div>
+              <span class="metric-val" id="m-forms-val">--%</span>
+            </div>
+
+            <div class="metric-bar-item">
+              <span>🔍 Viewport Zoom & Scaling (1.4.4):</span>
+              <div class="bar-track"><div class="bar-fill" id="m-zoom-bar" style="width: 100%;"></div></div>
+              <span class="metric-val" id="m-zoom-val">100%</span>
+            </div>
+
+            <div class="metric-bar-item">
+              <span>♿ Screen Reader Lang (3.1.1):</span>
+              <div class="bar-track"><div class="bar-fill" id="m-sr-bar" style="width: 100%;"></div></div>
+              <span class="metric-val" id="m-sr-val">100%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="audit-actions">
+          <button class="btn btn-primary" id="run-autofix-btn">
+            ⚡ One-Click Auto-Fix (Boost to 95%+)
+          </button>
+          <button class="btn btn-secondary" id="export-report-btn">
+            📄 Export Site Owner Compliance Report
+          </button>
+          <button class="btn btn-secondary" id="run-scan-btn">
+            📊 Re-Scan Live DOM
+          </button>
+        </div>
+
+        <div id="fix-success-banner" class="fix-success-banner" role="status"></div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 7. CHROME EXTENSION DOWNLOAD & QUICK SETUP -->
+    <!-- ========================================== -->
+    <section id="extension" class="section alt" aria-labelledby="ext-heading">
+      <div class="wrap">
+        <div class="narrow">
+          <h2 id="ext-heading">Get The Usual Suspects Chrome Extension</h2>
+          <p class="hero-lead">Install the extension in Chrome, Edge, or Brave in under 30 seconds to bring universal accessibility to any site you browse.</p>
+        </div>
+
+        <div class="ext-download-grid">
+          <div>
+            <div style="background:var(--surface-card); border:1px solid var(--line); border-radius:var(--radius-lg); padding:2rem; box-shadow:var(--shadow-md);">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem;">
+                <span style="font-size:1.15rem; font-weight:800;">The Usual Suspects Chrome Extension</span>
+                <span style="background:var(--primary); color:#fff; font-size:0.8rem; font-weight:700; padding:0.2rem 0.6rem; border-radius:99px;">v2.1 MV3</span>
+              </div>
+              <p style="color:var(--text-muted); margin-bottom:1.5rem;">
+                Includes VIBGYOR themes, Dyslexia typography, Motor keyboard navigation, Text-to-Speech audio reader, and voice navigation across all websites.
+              </p>
+              
+              <a class="btn btn-primary btn-lg" style="width:100%; text-align:center;" href="downloads/the-usual-suspects-extension-v2.1.zip" download="the-usual-suspects-extension-v2.1.zip">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span>Download Extension (.zip)</span>
+              </a>
+
+              <div class="install-steps">
+                <div class="step-card">
+                  <div class="step-num">1</div>
+                  <div class="step-text">
+                    <h4>Unpack the Archive</h4>
+                    <p>Unzip <code>the-usual-suspects-extension-v2.1.zip</code> to a folder on your computer.</p>
+                  </div>
+                </div>
+
+                <div class="step-card">
+                  <div class="step-num">2</div>
+                  <div class="step-text">
+                    <h4>Open Extensions Page</h4>
+                    <p>In Chrome or Edge, navigate to <code>chrome://extensions</code> and turn on <strong>Developer mode</strong> in the top-right corner.</p>
+                  </div>
+                </div>
+
+                <div class="step-card">
+                  <div class="step-num">3</div>
+                  <div class="step-text">
+                    <h4>Load Unpacked Extension</h4>
+                    <p>Click <strong>Load unpacked</strong> and select the unzipped folder. You're ready to browse accessible!</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hotkeys Cheatsheet -->
+          <div>
+            <h3>Universal Accessibility Hotkeys</h3>
+            <p style="color:var(--text-muted);">Control accessibility features instantly with keyboard shortcuts from any active webpage:</p>
+
+            <table class="hotkeys-table" aria-label="Extension keyboard shortcuts">
+              <thead>
+                <tr><th>Shortcut</th><th>Action</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><kbd>Alt</kbd> + <kbd>A</kbd></td><td>Read selected text or active element aloud</td></tr>
+                <tr><td><kbd>Alt</kbd> + <kbd>R</kbd></td><td>Toggle Reading Ruler focus guide</td></tr>
+                <tr><td><kbd>Alt</kbd> + <kbd>K</kbd></td><td>Toggle Glowing Focus Rings for keyboard navigation</td></tr>
+                <tr><td><kbd>Alt</kbd> + <kbd>C</kbd></td><td>Auto-Boost Contrast on low-contrast elements</td></tr>
+                <tr><td><kbd>Alt</kbd> + <kbd>V</kbd></td><td>Start hands-free voice command navigation</td></tr>
+                <tr><td><kbd>Alt</kbd> + <kbd>S</kbd></td><td>Skip straight to main content landmark</td></tr>
+                <tr><td><strong>Double Click</strong></td><td>Immediately stop all speech synthesis audio</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 8. WEBSITE OWNER DROP-IN EMBED GENERATOR -->
+    <!-- ========================================== -->
+    <section id="widget" class="wrap section" aria-labelledby="widget-heading">
+      <div class="narrow">
+        <h2 id="widget-heading">For Website Owners & Public Portals</h2>
+        <p class="hero-lead">Equip your website with The Usual Suspects in 1 line of code. No account, no subscription, zero data tracking.</p>
+      </div>
+
+      <div class="embed-box">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <h3 style="margin:0;">1-Line Embed Script</h3>
+          <label style="display:inline-flex; align-items:center; gap:0.5rem; font-weight:700; cursor:pointer;">
+            <input type="checkbox" id="try-live-widget-switch" style="width:1.2rem; height:1.2rem; accent-color:var(--primary);">
+            <span>Test Drop-in Widget on this page right now</span>
+          </label>
+        </div>
+
+        <div class="code-snippet-wrap">
+          <pre><code id="embed-snippet-code">&lt;script src="https://theusualsuspects.io/widget.js" defer&gt;&lt;/script&gt;</code></pre>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-top:1.2rem;">
+          <button class="btn btn-primary" id="copy-embed-btn">📋 Copy Script</button>
+
+          <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center; font-size:0.95rem;">
+            <label>Badge Position:
+              <select id="embed-opt-pos" style="padding:0.4rem; border-radius:6px; border:1px solid var(--line); font:inherit; background:var(--bg); color:var(--text);">
+                <option value="right">Bottom Right</option>
+                <option value="left">Bottom Left</option>
+              </select>
+            </label>
+
+            <label>Default Theme:
+              <select id="embed-opt-theme" style="padding:0.4rem; border-radius:6px; border:1px solid var(--line); font:inherit; background:var(--bg); color:var(--text);">
+                <option value="default">Default</option>
+                <option value="dark">Dark</option>
+                <option value="night">Night Owl</option>
+                <option value="contrast">High Contrast</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <p style="color:var(--text-muted); font-size:0.9rem; margin-top:1.2rem;">
+          Paste this snippet right before your closing <code>&lt;/body&gt;</code> tag. Compatible with WordPress, Next.js, Webflow, Shopify, and standard HTML portals.
+        </p>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 9. LIVE WEBSITE DEMO & INTERACTIVE SIMULATOR -->
+    <!-- ========================================== -->
+    <section id="website-demo" class="wrap section" aria-labelledby="demo-heading">
+      <div class="narrow">
+        <span class="hero-tag" style="background:var(--primary-light); color:var(--primary); font-weight:800;">🏥 Live Website Demo</span>
+        <h2 id="demo-heading" style="margin-top:0.5rem;">Apex Community Health Portal</h2>
+        <p class="hero-lead">
+          Test The Usual Suspects accessibility layer on a real-world municipal healthcare portal. The floating <strong>♿ badge</strong> in the bottom right corner of the simulated browser below is fully interactive — try the <strong>1-click 95%+ auto-fix</strong>, <strong>dyslexia typography</strong>, <strong>reading ruler</strong>, and <strong>voice commands</strong> directly inside the page!
+        </p>
+      </div>
+
+      <!-- Realistic Browser Shell Frame -->
+      <div class="browser-simulator">
+        <div class="browser-chrome">
+          <!-- Window Dots -->
+          <div class="browser-dots" aria-hidden="true">
+            <span class="browser-dot dot-red"></span>
+            <span class="browser-dot dot-yellow"></span>
+            <span class="browser-dot dot-green"></span>
+          </div>
+
+          <!-- Address Bar -->
+          <div class="browser-url-bar" title="Simulated Portal URL">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span class="browser-url-text">https://portal.apexhealth.org (Live Integration)</span>
+          </div>
+
+          <!-- Controls: Viewport Switcher & External Link -->
+          <div class="browser-controls">
+            <div class="device-btn-group" role="group" aria-label="Device viewport simulation modes">
+              <button class="device-btn active" id="view-desktop-btn" aria-label="Desktop View (100% width)" title="Desktop View (100%)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                <span>Desktop</span>
+              </button>
+              <button class="device-btn" id="view-tablet-btn" aria-label="Tablet View (768px width)" title="Tablet View (768px)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                <span>Tablet</span>
+              </button>
+              <button class="device-btn" id="view-mobile-btn" aria-label="Mobile View (390px width)" title="Mobile View (390px)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                <span>Mobile</span>
+              </button>
+            </div>
+
+            <button class="btn btn-secondary" id="reload-demo-btn" style="padding:0.35rem 0.75rem; font-size:0.82rem;" title="Reload Demo Site">
+              ↻ Reset
+            </button>
+
+            <a class="btn btn-primary" href="demo-site.html" target="_blank" rel="noopener" style="padding:0.35rem 0.85rem; font-size:0.82rem;" title="Open Standalone Demo Site in New Tab">
+              <span>Fullscreen ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Embedded Interactive Simulator Viewport -->
+        <div class="browser-viewport-wrapper">
+          <div class="browser-viewport" id="demo-viewport">
+            <iframe id="live-demo-iframe" src="demo-site.html" class="browser-iframe" title="Interactive Apex Community Health Portal Demo with The Usual Suspects Accessibility Layer" allow="microphone; speech"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Interactive Feature Guidance -->
+      <div class="demo-guide-pills">
+        <div class="guide-pill">
+          <div class="guide-pill-num">1</div>
+          <div>
+            <strong>Interactive Floating Widget</strong>
+            <p style="margin:2px 0 0; color:var(--text-muted); font-size:0.85rem;">Look at the bottom right of the simulation: click the <strong>♿ button</strong> to open The Usual Suspects control drawer.</p>
+          </div>
+        </div>
+
+        <div class="guide-pill">
+          <div class="guide-pill-num">2</div>
+          <div>
+            <strong>1-Click 95%+ Auto-Fix</strong>
+            <p style="margin:2px 0 0; color:var(--text-muted); font-size:0.85rem;">Click <strong>⚡ Auto-Fix All Issues</strong> inside the drawer to watch the score jump to 96% with automated DOM remediation.</p>
+          </div>
+        </div>
+
+        <div class="guide-pill">
+          <div class="guide-pill-num">3</div>
+          <div>
+            <strong>Live Hands-Free Voice Control</strong>
+            <p style="margin:2px 0 0; color:var(--text-muted); font-size:0.85rem;">Click the microphone inside the widget and speak: <em>"dark mode"</em>, <em>"dyslexia font"</em>, or <em>"reading ruler"</em>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 10. FREQUENTLY ASKED QUESTIONS -->
+    <!-- ========================================== -->
+    <section class="wrap narrow section" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Frequently Asked Questions</h2>
+
+      <details>
+        <summary>Does The Usual Suspects collect or transmit any user data?</summary>
+        <p>No. The Usual Suspects executes 100% locally in the client browser. No telemetry, cookies, analytics, or external API queries are executed. Voice recognition uses the browser's built-in Web Speech API.</p>
+      </details>
+
+      <details>
+        <summary>How does the 1-Click Auto-Fix remediate violations?</summary>
+        <p>The Auto-Fix engine dynamically traverses the active DOM to generate descriptive fallback alt tags for images, injects accessible labels for input fields, removes pinch-to-zoom viewport restrictions, and establishes primary landmarks and language specifications.</p>
+      </details>
+
+      <details>
+        <summary>What makes the Dyslexia Typography Engine unique?</summary>
+        <p>Unlike solutions that merely use standard fonts, The Usual Suspects integrates genuine OpenDyslexic vector fonts with heavy-bottom baselines that anchor letters against flipping or rotation, paired with custom letter, word, and line spacing.</p>
+      </details>
+
+      <details>
+        <summary>What is the bonus compliance report?</summary>
+        <p>The Usual Suspects generates an official, printable WCAG 2.1 Level AA Compliance Certificate (PDF/HTML) complete with grade certification, timestamp, domain verification, and pass/fail checklist for small businesses and regulatory audits.</p>
+      </details>
+    </section>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- 11. SITE FOOTER -->
+  <!-- ========================================== -->
+  <footer class="site-footer">
+    <div class="wrap foot-content">
+      <div>
+        <div style="font-weight:800; font-size:1.15rem; color:var(--text); margin-bottom:0.25rem;">
+          The Usual Suspects
+        </div>
+        <p style="margin:0; font-size:0.9rem;">
+          Universal Web Accessibility Layer • Hackathon Track 3 • Developed by <strong>The Usual Suspects</strong>
+        </p>
+      </div>
+
+      <ul class="foot-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#playground">Playground</a></li>
+        <li><a href="#audit">WCAG Audit</a></li>
+        <li><a href="#website-demo">Website Demo</a></li>
+        <li><a href="#extension">Download Extension</a></li>
+        <li><a href="demo-site.html" target="_blank" rel="noopener">Standalone Demo Site ↗</a></li>
+        <li><a href="#top">Back to Top ↑</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

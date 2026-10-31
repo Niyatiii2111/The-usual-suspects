@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Community Health Portal - Public Services</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8fafc;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #1e293b;
+      color: white;
+      padding: 16px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h2 {
+      margin: 0;
+      font-size: 20px;
+      color: #38bdf8;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: white;
+      padding: 48px 36px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      margin: 0 0 12px 0;
+      font-size: 32px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      max-width: 650px;
+      margin: auto;
+      opacity: 0.95;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: #0f172a;
+    }
+
+    .btn {
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 9px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #0369a1;
+    }
+
+    .portal-banner {
+      background: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      padding: 14px 20px;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 24px;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #94a3b8;
+      text-align: center;
+      padding: 24px;
+      font-size: 13px;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Accessible Header -->
+  <header>
+    <h2>🏥 Apex Health Portal</h2>
+    <nav style="display:flex; align-items:center;">
+      <a href="#services">Services</a>
+      <a href="#appointments">Appointments</a>
+      <a href="#records">Medical Records</a>
+      <a href="#support">Patient Support</a>
+      <button onclick="if(window.__THE_USUAL_SUSPECTS_TOGGLE_PANEL__) window.__THE_USUAL_SUSPECTS_TOGGLE_PANEL__(); else if(window.__EQITECH_TOGGLE_PANEL__) window.__EQITECH_TOGGLE_PANEL__();" style="background:#10ac84; color:#fff; border:none; padding:7px 14px; border-radius:20px; font-weight:bold; cursor:pointer; margin-left:16px; font-size:12px; box-shadow:0 2px 8px rgba(16,172,132,0.4);">♿ Accessibility Layer (Alt+A)</button>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <h1>Accessible Public Healthcare Services</h1>
+    <p>Empowering patients, elderly citizens, and individuals with disabilities to access online medical services barrier-free.</p>
+  </div>
+
+  <div class="container">
+    <div class="portal-banner" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+      <div style="flex:1; min-width:280px;">
+        <strong>Notice for Patients:</strong> This public portal is equipped with the <strong>The Usual Suspects Universal Accessibility Layer</strong>. You can test dyslexia fonts, reading ruler, high contrast, focus rings, voice commands, and one-click compliance.
+      </div>
+      <div>
+        <button onclick="if(window.__THE_USUAL_SUSPECTS_TOGGLE_PANEL__) window.__THE_USUAL_SUSPECTS_TOGGLE_PANEL__(); else if(window.__EQITECH_TOGGLE_PANEL__) window.__EQITECH_TOGGLE_PANEL__();" style="background:#0284c7; color:#fff; border:none; padding:9px 18px; border-radius:6px; font-weight:bold; cursor:pointer; font-size:13px; flex-shrink:0;">⚡ Open Accessibility Tools (Alt+A)</button>
+      </div>
+    </div>
+
+    <h2 id="services">Clinical Care & Consultations</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>General Medicine</h3>
+        <p>Comprehensive health examinations, routine evaluations, and preventative guidance with senior healthcare
+          specialists.</p>
+        <button class="btn" onclick="alert('✅ Consultation Confirmed:\nGeneral Medicine team assigned. Confirmation notification sent.');">Book Consultation</button>
+      </div>
+
+      <div class="card">
+        <h3>Vision & Eye Care</h3>
+        <p>Specialized ophthalmology examinations, visual accessibility therapy, and adaptive lens prescriptions.</p>
+        <button class="btn" onclick="alert('✅ Eye Exam Scheduled:\nVision accessibility specialist appointed for comprehensive testing.');">Schedule Eye Exam</button>
+      </div>
+
+      <div class="card">
+        <h3>Pediatric & Special Needs</h3>
+        <p>Compassionate care tailored for children with neurodiversity, dyslexia, sensory sensitivities, and physical
+          impairments.</p>
+        <button class="btn" onclick="alert('✅ Specialist Appointment Booked:\nPediatric & Special Needs team notified.');">Specialist Appointment</button>
+      </div>
+    </div>
+
+    <h2 id="appointments" style="margin-top: 40px;">Patient Registration Form</h2>
+    <div class="card">
+      <form onsubmit="event.preventDefault(); alert('✅ Patient Registration Submitted Successfully!\nAppointment reference: #APEX-2026-784.'); this.reset();">
+        <div style="margin-bottom: 14px;">
+          <label style="display:block; font-weight:600; margin-bottom:4px;" for="patientName">Full Name</label>
+          <input type="text" id="patientName" placeholder="Enter full name"
+            style="width:100%; padding:9px; border:1px solid #cbd5e1; border-radius:6px;">
+        </div>
+        <div style="margin-bottom: 14px;">
+          <label style="display:block; font-weight:600; margin-bottom:4px;" for="patientEmail">Email Address</label>
+          <input type="email" id="patientEmail" placeholder="name@example.com"
+            style="width:100%; padding:9px; border:1px solid #cbd5e1; border-radius:6px;">
+        </div>
+        <div style="margin-bottom: 14px;">
+          <label style="display:block; font-weight:600; margin-bottom:4px;" for="serviceSelect">Service Category</label>
+          <select id="serviceSelect" style="width:100%; padding:9px; border:1px solid #cbd5e1; border-radius:6px;">
+            <option>General Medicine</option>
+            <option>Vision & Eye Care</option>
+            <option>Pediatric & Special Needs</option>
+          </select>
+        </div>
+        <button type="submit" class="btn">Submit Patient Request</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Apex Community Health Portal. Certified accessible by The Usual Suspects Layer.</p>
+  </footer>
+
+  <!-- ======================================================== -->
+  <!-- 🌟 DROP-IN ACCESSIBILITY WIDGET (1 SINGLE SCRIPT TAG) -->
+  <!-- ======================================================== -->
+  <script src="widget.js"></script>
+</body>
+
+</html>

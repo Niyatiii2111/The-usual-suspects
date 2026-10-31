@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "Accessibility, Bionic & Voice Reader",
+  "version": "2.1",
+  "description": "Color themes, Bionic Reading, Dyslexia Font, Selected Text Audio, and Voice Commands for Web Navigation.",
+  "permissions": [
+    "scripting",
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "report.html",
+        "fonts/*.otf",
+        "fonts/*.woff",
+        "fonts/*.woff2"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ]
+}

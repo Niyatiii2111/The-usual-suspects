@@ -1,0 +1,11 @@
+# Operating System & IDE Files
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.tmp
+*.log
+
+# Nested git backup
+.git_nested_backup/
