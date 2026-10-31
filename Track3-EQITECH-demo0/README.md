@@ -10,6 +10,14 @@
 
 ---
 
+## 🌐 Live Demo
+
+Explore **The Usual Suspects – Accessibility Layer** here:
+
+🔗 [Click here to visit the live website](https://the-usual-suspects-frontend.vercel.app/)
+
+Try out the accessibility features and experience how the tool makes websites more inclusive and user-friendly.
+
 ## 🚀 Dual-Delivery Architecture
 
 ```mermaid
