@@ -1,136 +1,209 @@
-# The Usual Suspects - Universal Web Accessibility Layer for Any Website
-### Hackathon Problem Statement 1.4: Universal Web Accessibility Layer
+# THE USUAL SUSPECTS – Accessibility Layer for Any Website
 
-> **Problem:** Most websites fail basic accessibility checks, excluding visually impaired, dyslexic, and motor-impaired users.  
-> **Target Users:** Small businesses, public-service portals, users with disabilities.  
-> **Approach:** Dual-deployment accessibility solution:
-> 1. **Drop-in JavaScript Widget (`widget.js`)**: A 1-line script for small business and public portal owners.
-> 2. **Chrome Extension (Manifest V3)**: For users with disabilities to navigate any site across the web.
-> **Bonus Twist:** One-click accessibility score compliance report for site owners.
+## Overview
 
----
+It is a web accessibility solution developed to improve the browsing experience for individuals with reading difficulties, dyslexia, visual impairments, motor impairments, and users who prefer customized visual environments.
 
-## 🚀 Dual-Delivery Architecture
+Traditional websites often provide limited flexibility in terms of readability, visual comfort, and hands-free navigation. It addresses these challenges through a lightweight Chrome extension that integrates visual customization, dyslexia-friendly typography, text transformation, speech assistance, voice-based navigation, and an accessibility score audit.
 
-```mermaid
-flowchart TD
-    subgraph S1 [Mode 1: Drop-in Script for Site Owners]
-        A[Website Owner embeds widget.js] --> B[Discreet ♿ Floating Badge appears]
-        B --> C[Instant Page Audit + 1-Click 95%+ Auto-Fix + Report Export]
-    end
+The extension allows users to personalize webpages according to their reading and accessibility preferences without modifying the original website.
 
-    subgraph S2 [Mode 2: Chrome Extension for End Users]
-        D[Disabled User Browses ANY Webpage] --> E[The Usual Suspects Extension Popup]
-        E --> F[VIBGYOR Themes, OpenDyslexic, Hotkeys, TTS, Voice Navigation]
-    end
+## Problem Statement
+
+Many websites are not designed to accommodate different accessibility requirements.
+
+Users may experience difficulties due to:
+
+- Poor color contrast and uncomfortable visual layouts.
+- Reading difficulties caused by complex text presentation, especially for dyslexic users.
+- Limited access to audio-based reading assistance.
+- Dependence on mouse-based navigation.
+- Lack of personalized reading environments.
+- No easy way to measure how accessible a website is.
+
+## Our Solution
+
+It provides an integrated accessibility toolkit that transforms the way users interact with webpages.
+
+It combines customizable VIBGYOR themes, special visual modes, a dyslexia-friendly font, Bionic Reading, a reading ruler, focus rings, contrast boosting, selected text-to-speech, voice-controlled navigation, and a website accessibility audit into a single browser extension.
+
+## Key Features
+
+### 1. VIBGYOR Color Themes
+
+- Provides seven color themes: Violet, Indigo, Blue, Green, Yellow, Orange, and Red.
+- Applies the selected color to the webpage for a comfortable visual environment.
+- Applies the Lexend font to improve reading comfort.
+- Allows users to customize the visual appearance of webpages.
+
+### 2. Special Modes
+
+- **Black:** a high-contrast black background mode.
+- **White:** a clean, bright white background mode.
+- **Dark Mode:** a low-strain dark theme for comfortable reading.
+- **Night Mode:** a warm, low-light theme for night-time browsing.
+- **Reset Original:** one-click button that restores the website's original styling.
+
+### 3. Dyslexia Support
+
+- Provides an **Enable Dyslexia Font** option that applies the OpenDyslexic typeface to any webpage.
+- OpenDyslexic uses heavier letter bottoms, which helps anchor letters and reduces flipping and rotation of characters.
+- Supports Regular and Bold weights for clear emphasis without blurry faux-bold rendering.
+- Applies dyslexia-friendly spacing with increased word-spacing, letter-spacing, and line-height.
+
+### 4. Accessibility and Efficiency Score
+
+- The **Audit Website Score** button scans the current webpage and gives it an accessibility score out of 100.
+- Checks key areas such as image alt text, headings and landmarks, form labels and button names, zoom restrictions, and the page language attribute.
+- Helps users and site owners quickly understand how accessible a website is.
+
+### 5. Motor and Visual Assistance
+
+- **Reading Ruler (Alt+R):** a tinted guide that follows the cursor to help users keep their place and avoid skipping lines.
+- **Focus Rings (Alt+K):** highly visible focus indicators that make keyboard navigation easier for users who cannot use a mouse.
+- **Auto-Boost Contrast (Alt+C):** automatically improves the contrast of low-contrast text and elements.
+
+### 6. Bionic Reading
+
+- Identifies individual words across webpage text.
+- Highlights the initial characters of words using bold formatting.
+- Helps users visually scan text more efficiently.
+- Dynamically transforms webpage text with the **Toggle Bionic** button.
+
+### 7. Selected Text-to-Speech
+
+- Allows users to select any text on a webpage.
+- Displays a floating Read button near the selected text.
+- Converts the selected content into speech.
+- Uses the browser's built-in Speech Synthesis API.
+- The **Stop Audio** button ends playback at any time.
+
+### 8. Voice-Controlled Navigation
+
+- Enables hands-free webpage navigation with the **Start Voice Command** button.
+- Recognizes spoken commands using the Web Speech API.
+- Supports commands such as:
+  - "Open About Us"
+  - "Click Contact"
+  - "Open Home"
+- Identifies matching webpage elements.
+- Automatically scrolls to and clicks the matched element.
+
+### Keyboard Shortcuts
+
+| Shortcut | Action |
+|---|---|
+| Alt + R | Toggle Reading Ruler |
+| Alt + K | Toggle Focus Rings |
+| Alt + C | Auto-Boost Contrast |
+
+## How It Works
+
+It follows a simple interaction-based workflow:
+
+1. The user installs and opens the Chrome extension.
+2. The extension popup provides different accessibility options.
+3. The user selects the desired feature.
+4. JavaScript processes the selected action.
+5. The extension interacts with the webpage DOM.
+6. The selected accessibility transformation is applied.
+
+## Technology Stack
+
+| Technology | Purpose |
+|---|---|
+| HTML5 | Extension popup structure |
+| CSS3 | Styling and visual customization |
+| JavaScript (ES6) | Core functionality and DOM manipulation |
+| Chrome Extension Manifest V3 | Extension configuration |
+| Chrome Scripting API | Dynamic webpage styling and script execution |
+| Chrome Runtime API | Communication between extension components |
+| Web Speech API | Speech recognition and text-to-speech |
+| DOM API | Text processing and webpage interaction |
+| Lexend Font | Reading-friendly typography |
+| OpenDyslexic Font | Dyslexia-friendly typography |
+
+## Installation & Setup
+
+Follow these steps to run locally.
+
+### Prerequisites
+
+- Google Chrome browser.
+- Git installed on your system.
+- Basic knowledge of Chrome extensions.
+
+### Step 1: Clone the Repository
+
+### Step 2: Navigate to the Project Directory
+
+### Step 3: Open Chrome Extensions
+
+Open the following URL in Google Chrome:
+
+```text
+chrome://extensions/
 ```
 
----
+### Step 4: Enable Developer Mode
 
-## ✨ Complete Feature Breakdown
+- Enable **Developer mode** from the top-right corner.
+- Click on **Load unpacked**.
+- Select the cloned project folder containing `manifest.json`.
 
-### 1. 🌈 VIBGYOR & High-Contrast Visual Accommodation Engine
-* **Full 7-Color Rainbow Spectrum**: Violet (`#8B00FF`), Indigo (`#4B0082`), Blue (`#0000FF`), Green (`#00FF00`), Yellow (`#FFFF00`), Orange (`#FF7F00`), Red (`#FF0000`).
-* **Special Accessibility Modes**:
-  * **Black High-Contrast**: Deep black background (`#000000`) with crisp high-contrast text (`#E0E0E0`).
-  * **White Mode**: High-luminance white mode (`#FFFFFF`) with dark readable text (`#121212`).
-  * **🌙 Dark / Night Owl Mode**: Low-strain dark theme (`#121212`) with neon green readability focus (`#00E676`).
-  * **↺ 1-Click Reset**: Restores natural site styling.
+### Step 5: Start Using Extension
 
-### 2. 🛡️ Real-Time WCAG 2.1 AA Audit Scanner
-* Evaluates active webpage DOM across 5 core categories (100 points total):
-  * **🖼️ Non-Text Content (WCAG 1.1.1):** Checks image `alt` attributes and ARIA roles.
-  * **📑 Headings & Landmarks (WCAG 1.3.1):** Verifies single `<h1>`, checks heading order, and detects landmark roles (`<main>`, `<nav>`).
-  * **🏷️ Input & Control Identification (WCAG 4.1.2 & 3.3.2):** Validates accessible form labels and button names.
-  * **🔍 Text Scaling & Zoom (WCAG 1.4.4):** Flags viewport zoom blocks (`user-scalable=no`, `maximum-scale=1.0`).
-  * **♿ Screen Reader Readiness (WCAG 3.1.1):** Checks `<html lang="...">` pronunciation attributes and table headers.
+- Open any supported webpage.
+- Click the extension icon.
+- Select your preferred accessibility feature.
+- Explore customized reading, audio assistance, and voice navigation.
 
-### 3. ⚡ One-Click Auto-Fix (Boost to 95%+)
-* Dynamically patches all detected accessibility violations in the live DOM in under 1 second:
-  * Injects descriptive `alt` and `aria-label` tags into images from file metadata.
-  * Removes pinch-to-zoom viewport restrictions and enables scaling up to 5x.
-  * Generates accessible labels for input fields and icon buttons.
-  * Injects accessible primary `<h1>` and `role="main"` landmarks.
-  * Sets correct `lang` attribute for screen reader speech engines.
+## Testing
 
-### 4. 📄 Executive Site Owner Compliance Report (The Bonus Twist)
-* Generates a printable, client-ready **Accessibility Compliance Certificate (HTML / Print to PDF)** with:
-  * Domain URL, timestamp, overall score (0–100), and Grade (A/B/C/F).
-  * WCAG 2.1 AA checklist with Pass/Fail status for every metric.
-  * Certified stamp for small businesses, public portals, and regulatory compliance.
+The extension can be tested using different webpages and interaction scenarios.
 
-### 5. 🔤 Dyslexia Typography Engine
-* **OpenDyslexic-Regular**: True heavy-bottom font that anchors letters against flipping or rotation.
-* **OpenDyslexic-Bold**: True vector bolding preventing browser faux-bold blurring.
-* Custom word-spacing (`0.28em`), letter-spacing (`0.12em`), and line-height (`2.0`).
+| Feature | Testing Scenario |
+|---|---|
+| VIBGYOR Themes | Click each color and check the webpage changes |
+| Special Modes | Switch between Black, White, Dark, and Night modes |
+| Reset Original | Click Reset Original and check the site returns to its default look |
+| Lexend Font | Apply the reading font to a webpage |
+| Dyslexia Font | Click Enable Dyslexia Font and check that OpenDyslexic is applied |
+| Audit Website Score | Click Audit Website Score and check the score shown |
+| Reading Ruler | Press Alt+R and move the cursor over text |
+| Focus Rings | Press Alt+K and navigate with the Tab key |
+| Auto-Boost Contrast | Press Alt+C on a low-contrast page |
+| Bionic Reading | Click Toggle Bionic and check that word beginnings are bold |
+| Text-to-Speech | Select text, click Read, then use Stop Audio |
+| Voice Navigation | Click Start Voice Command and say "Open About Us" |
 
-### 6. ⚡ Bionic Reading Engine
-* Boldens first-half fixation points of words to guide visual focus and increase reading speed for ADHD and neurodiverse readers.
+**Note:** Voice recognition availability depends on browser support and microphone permissions. The current voice recognition configuration uses English (US).
 
-### 7. 🎯 Motor-Impaired Keyboard Navigation & Focus Rings
-* **High-Visibility Focus Rings**: Injects glowing 3.5px orange focus indicators (`:focus-visible`) for easy tab navigation without a mouse.
-* **Skip to Main Content Link**: Keyboard-accessible shortcut at the top of the DOM jumping straight to `<main>`.
-* **Universal Accessibility Hotkeys**:
-  * `Alt + A`: Open / Close Accessibility Layer Panel
-  * `Alt + R`: Toggle Reading Ruler
-  * `Alt + K`: Toggle High-Visibility Focus Rings
-  * `Alt + C`: Auto-boost contrast on low-contrast elements
-  * `Alt + V`: Start voice command navigation inside accessibility
-  * `Alt + S`: Skip to main content
+## Impact & Benefits
 
-### 8. 📏 Visual Reading Ruler (ADHD & Dyslexia Guide)
-* Floating tinted visual guide that tracks mouse movement across paragraphs, preventing line skipping.
+It aims to make everyday web browsing more inclusive and user-friendly.
 
-### 9. 🎙️ Web Speech API & Voice Navigation Engine
-* Fully integrated **inside the Accessibility Layer**:
-  * **Speech Synthesis (TTS):** Read page aloud or speak selected text.
-  * **Speech Recognition:** Hands-free voice commands ("dark mode", "auto fix", "dyslexia font", "reading ruler", "focus rings", "scroll down", "book consultation", etc.).
-  * Inline quick command chips and interactive input fallback for browser environments with restricted microphone permissions.
+- **Improved Readability:** Personalized typography, visual themes, and special modes.
+- **Dyslexia Support:** OpenDyslexic font and spacing make text easier to read.
+- **Motor Accessibility:** Focus rings and keyboard shortcuts reduce dependence on a mouse.
+- **Audio Accessibility:** Converts selected webpage text into speech.
+- **Hands-Free Interaction:** Enables voice-based webpage navigation.
+- **Accessibility Insight:** Audit score shows how accessible a page is.
+- **User Customization:** Provides multiple visual environments with one-click reset.
+- **Inclusive Browsing:** Supports different reading and interaction preferences.
 
----
+## Future Enhancements
 
-## 📁 Project Directory Structure
+Potential improvements to make it more powerful include:
 
-```
-The-Usual-Suspects/
-├── Track3-EQITECH-demo0/
-│   ├── frontend/              # 🌟 Official Showcase & Landing Portal (interactive playground, audit, embed generator)
-│   ├── manifest.json          # Chrome Extension Manifest V3 configuration
-│   ├── popup.html             # Extension Popup UI (themes, audit, fixes, report, motor tools)
-│   ├── popup.js               # Extension background execution & DOM remediation logic
-│   ├── content.js             # Injected content script (hotkeys, ruler, TTS, contrast, voice)
-│   ├── widget.js              # 🌟 Standalone 1-Line Drop-in Widget for website owners
-│   ├── demo-site.html         # 🌟 Live Public Service Portal demo showcasing widget.js
-│   ├── report.html            # Printable WCAG compliance certificate
-│   └── fonts/                 # Bundled OpenDyslexic (.woff2 and .otf) fonts
-├── OpenDyslexic-*             # OpenDyslexic font distributions
-├── LICENSE                    # Open Source License
-└── README.md                  # Comprehensive Documentation
-```
+- AI-powered webpage summarization.
+- Multilingual text-to-speech support.
+- Voice-controlled scrolling and additional browser actions.
+- Personalized accessibility profiles.
+- Advanced contrast and font customization.
+- Improved compatibility with dynamic webpages.
+- Reading assistance with intelligent content simplification.
 
----
+## Project Demonstration
 
-## 🧪 How to Run and Test
-
-### 1. View the Live Showcase Portal
-Open `Track3-EQITECH-demo0/frontend/index.html` in any browser to test:
-- Interactive Live Playground with real-time DOM accessibility transformation
-- 7-Color VIBGYOR palette & special high-contrast modes
-- Live WCAG scanner and 1-Click Auto-Fix
-- Drop-in Embed Code generator for website owners
-- Downloadable Chrome Extension packages
-
-### 2. Test the Drop-in Widget on a Live Public Portal
-Open `Track3-EQITECH-demo0/demo-site.html` in any browser:
-- Click the floating `♿` badge (or press `Alt + A`) in the bottom right corner
-- Click **⚡ 1-Click Auto-Fix (95%+)** to instantly remediate accessibility violations
-- Test OpenDyslexic font, Bionic reading, Reading ruler (`Alt + R`), and glowing Focus rings (`Alt + K`)
-- Try Voice Commands (`Alt + V`) directly inside the accessibility panel drawer
-- Click **📄 Generate Compliance Report** to export a printable certificate
-
-### 3. Load the Chrome Extension (Manifest V3)
-1. Open Google Chrome and go to `chrome://extensions/`
-2. Enable **Developer mode** (top-right toggle)
-3. Click **Load unpacked**
-4. Select the `Track3-EQITECH-demo0` directory
-5. Pin the extension and open any website across the internet to enjoy full accessibility remediations!
+A demonstration video is available in the repository.
