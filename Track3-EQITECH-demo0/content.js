@@ -5,7 +5,7 @@ try {
   document.documentElement.setAttribute('data-extension-version', '2.1');
   window.dispatchEvent(new CustomEvent('the-usual-suspects-extension-ready', { detail: { version: '2.1' } }));
   window.dispatchEvent(new CustomEvent('eqitech-extension-ready', { detail: { version: '2.1' } }));
-} catch (e) {}
+} catch (e) { }
 
 // --- 1. FEATURE: SELECT TEXT TO SPEAK (AUDIO) ---
 let floatingAudioBtn = null;
@@ -134,7 +134,7 @@ function startVoiceRecognition() {
   }
 
   if (activeContentVoiceRec) {
-    try { activeContentVoiceRec.abort(); } catch (e) {}
+    try { activeContentVoiceRec.abort(); } catch (e) { }
     activeContentVoiceRec = null;
   }
 
@@ -270,7 +270,7 @@ function toggleReadingRuler() {
       readingRulerEl.style.top = '40vh';
       readingRulerEl.style.display = 'block';
     }
-    showExtensionToast("📏 Reading Ruler Enabled");
+    showExtensionToast(" Reading Ruler Enabled");
   } else {
     if (readingRulerEl) readingRulerEl.style.display = 'none';
     showExtensionToast("Reading Ruler Disabled");
@@ -349,7 +349,7 @@ function toggleKeyboardNavMode() {
     skipLink.focus();
   }
 
-  showExtensionToast("🎯 Focus Rings ON (Press TAB to navigate)");
+  showExtensionToast(" Focus Rings ON (Press TAB to navigate)");
 }
 
 // --- 5. FEATURE: AUTOMATIC CONTRAST AUTO-REPAIR (WCAG 1.4.3) ---
@@ -386,7 +386,7 @@ function fixPageContrast() {
     }
   `;
   document.head.appendChild(style);
-  showExtensionToast("🌓 High Contrast Enabled");
+  showExtensionToast(" High Contrast Enabled");
   return document.querySelectorAll('p, span, h1, h2, h3, a, button').length;
 }
 
@@ -516,7 +516,7 @@ function getImageDescription(img) {
       if (name && name.length > 2 && !/^\d+$/.test(name)) {
         return `Image showing ${name}`;
       }
-    } catch (e) {}
+    } catch (e) { }
   }
   return "Photograph illustrating website content";
 }
@@ -650,4 +650,4 @@ window.addEventListener('keydown', (e) => {
     imageExplainerModal.style.display = 'none';
     if (window.speechSynthesis) window.speechSynthesis.cancel();
   }
-});
+});
